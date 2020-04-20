@@ -11,8 +11,8 @@ app.use(express.static(__dirname + '/public'))
 io.on('connection', (socket) => {
     console.log("New connection")
 
-    socket.on('message', (msg) => {
-        io.emit('message', msg)
+    socket.on('message', (incoming) => {
+        io.emit('message', incoming)
 })
 
     socket.on('disconnect', () => {

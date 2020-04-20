@@ -1,9 +1,18 @@
 let socket = io()
+let name = ""
 
-socket.on('message', (msg) => {
+
+window.onload = () => {
+ name = prompt("vad heter du?")
+
+}
+
+socket.on('message', (incoming) => {
+    console.log(name)
     let list = document.getElementById("messages")
     let listItem = document.createElement("li")
-    listItem.innerText = msg
+
+    listItem.innerText = incoming.name + ": " + incoming.message
     list.appendChild(listItem) 
 
 })
@@ -13,6 +22,6 @@ function sendMessage() {
     let message = input.value
     input.value = ""
     console.log(message)
-    socket.emit('message', message)
+    socket.emit('message', { name, message })
 
 }
